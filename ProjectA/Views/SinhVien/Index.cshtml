@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ProjectA.Models.SinhVien>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Pagiantion Product</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>IdSinhVien</th>
+                    <th>TenSinhVien</th>
+                    <th>NgaySinh</th>
+                    <th>GioiTinh</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdSinhVien</td>
+                        <td>@item.TenSinhVien</td>
+                        <td>@item.NgaySinh</td>
+                        <td>@item.GioiTinh</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <ul class="pagination">
+            @{
+                int numberPage = ViewBag.numberPage;
+                int pageCurrent = ViewBag.pageCurrent;
+                int offset = 2;//number display page
+
+
+                //config FirstLink
+                if (pageCurrent > 1)
+                {
+                    int prevPage = pageCurrent - 1;
+                    var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+                    <li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="PrevLink">Prev Link</a></li>
+                }
+
+                int from = pageCurrent - offset;
+                int to = pageCurrent + offset;
+                if (from <= 0)
+                {
+                    from = 1;
+                    to = offset * 2;
+                }
+
+
+                if (to > numberPage)
+                {
+                    to = numberPage;
+                }
+
+                int i;
+                for (i = from; i <= to; i++)
+                {
+                    var parms = new Dictionary<string, string>
+                        {
+                        { "page",i.ToString()}
+                    };
+                    if (pageCurrent == i)
+                    {
+                        <li class="active"><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="parms">@i</a></li>
+                    }
+
+                }
+
+                if (pageCurrent < numberPage - (to / 2))
+                {
+                    <li><a>...</a></li>
+                    var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+                    <li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="LastLink">Last Link</a></li>
+                }
+
+                if (pageCurrent < numberPage)
+                {
+                    int nextPage = pageCurrent + 1;
+                    var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+                    <li><a asp-controller="SinhVien" asp-action="Index" asp-all-route-data="NextLink">Next Link</a></li>
+                }
+            }
+        </ul>
+    </div>
+</div>
