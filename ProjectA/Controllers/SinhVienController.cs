@@ -26,7 +26,7 @@ namespace ProjectA.Controllers
 
         public IActionResult Index(int? page = 0)
         {
-            int limit = 3;
+            int limit = 7;
             int start;
             if (page > 0)
             {
