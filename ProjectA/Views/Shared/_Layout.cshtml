@@ -8,10 +8,43 @@
     <title>@ViewData["Title"] - ProjectA</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        @@media (min-width: 1200px) {
+            .container {
+                max-width: 1200px !important;
+            }
+        }
+        .header-nav li a:hover, .header-nav li a:focus, .header-nav button:hover, .header-nav button:focus {
+            color: #0094ff !important;
+        }
+        .list-left a:hover, .list-left a:focus {
+            z-index: 1;
+            color: #fff;
+            border-color: #007bff;
+            text-decoration: none;
+            background-color: #007bff;
+        }
+        .user-name:hover, .user-name:focus {
+            color: #fff !important;
+            text-decoration: none !important;
+            background-color: transparent !important;
+        }
+        .list-btn a {
+            padding: 3px 4px !important;
+            margin: 2px 0 !important;
+        }
+        .table td, .table th {
+            padding: 6px !important;
+        }
+
+        .table th {
+            text-align: center !important;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HocBongUTE</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -19,51 +52,30 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end">
-                        @*<li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="XetHocBong" asp-action="Index"> Danh sách học bổng</a>
-        </li>*@
+                    <ul class="navbar-nav flex-grow-1 justify-content-end header-nav">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
 
-
-                        @*@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-        {
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Quản lý
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" asp-controller="Administration"
-                       asp-action="ListUsers">Quản trị viên</a>
-                    <a class="dropdown-item" asp-controller="Administration"
-                       asp-action="ListRoles">Phân quyền</a>
-                </div>
-            </li>
-        }*@
-
-                            @if (signInManager.IsSignedIn(User))
-                            {
-                                <form method="post" asp-action="logout" asp-controller="account">
-                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
-                                        Logout @User.Identity.Name
+                                <a class="nav-link text-light user-name">Xin chào @User.Identity.Name</a>
+                            </li>
+                            <li class="nav-item d-flex align-items-center">
+                                <form class="d-flex align-items-center" method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0 text-light">
+                                        Đăng Xuất
                                     </button>
                                 </form>
+                            </li>
+                                }
+                                else
+                                {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Register">Đăng Ký</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Account" asp-action="Login">Đăng Nhập</a>
+                            </li>
                             }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Đăng Ký</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Đăng Nhập</a>
-                                </li>
-                             }
 
                         </ul>
                 </div>
@@ -72,51 +84,30 @@
     </header>
     <div class="container">
         <div class="row">
-            <ul class="list-group col-md-4 col-lg-3 mb-5">
-                <li class="list-group-item">
-                    <a class="text-dark d-flex" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
-                </li>
-                <li class="list-group-item">
-                    <a class="text-dark d-flex" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
-                </li>
-                <li class="list-group-item">
-                    <a class="text-dark d-flex" asp-area="" asp-controller="XetHocBong" asp-action="Index"> Danh sách học bổng</a>
-                </li>
-
+            <div class="list-group col-md-4 col-lg-3 mb-5 list-left">
+                <a asp-area="" asp-controller="HocBong" asp-action="Index" class="list-group-item list-group-item-action" aria-current="true">
+                    Học Bổng
+                </a>
+                <a asp-area="" asp-controller="SinhVien" asp-action="Index" class="list-group-item list-group-item-action">
+                    Sinh Viên
+                </a>
+                <a asp-area="" asp-controller="XetHocBong" asp-action="Index" class="list-group-item list-group-item-action">Danh sách học bổng</a>
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-
-                    <li class="list-group-item">
-                        <a class="text-dark d-flex" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> Quản lý</a>
-                    </li>
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item list-group-item-action">Quản lý</a>
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <a class="text-dark d-flex" asp-controller="Administration"
+                            <div class="list-group">
+                                    <a class="list-group-item list-group-item-action" asp-controller="Administration"
                                        asp-action="ListUsers">Quản trị viên</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <a class="text-dark d-flex" asp-controller="Administration"
+                                    <a class="list-group-item list-group-item-action" asp-controller="Administration"
                                        asp-action="ListRoles">Phân quyền</a>
-                                </li>
-                            </ul>
+                            </div>
                         </div>
                     </div>
-                    @*<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Quản lý
-                </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" asp-controller="Administration"
-                               asp-action="ListUsers">Quản trị viên</a>
-                            <a class="dropdown-item" asp-controller="Administration"
-                               asp-action="ListRoles">Phân quyền</a>
-                        </div>
-                    </li>*@
                 }
-            </ul>
+            </div>
+  
             <main role="main" class="pb-3 col-md-8 col-lg-9">
                 @RenderBody()
             </main>

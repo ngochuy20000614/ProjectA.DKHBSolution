@@ -22,10 +22,10 @@
                     <td class="align-middle">@item.TenSinhVien</td>
                     <td class="align-middle">@item.NgaySinh</td>
                     <td class="align-middle">@item.GioiTinh</td>
-                    <td class="align-middle">
-                        <a asp-action="Edit" class="btn btn-outline-success my-1" asp-route-id="@item.IdSinhVien">Cập nhật</a>
-                        <a asp-action="Details" class="btn btn-outline-info my-1" asp-route-id="@item.IdSinhVien">Chi tiết</a>
-                        <a asp-action="Delete" class="btn btn-outline-danger my-1" asp-route-id="@item.IdSinhVien">Xoá</a>
+                    <td class="align-middle list-btn">
+                        <a asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.IdSinhVien">Cập nhật</a>
+                        <a asp-action="Details" class="btn btn-outline-info" asp-route-id="@item.IdSinhVien">Chi tiết</a>
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@item.IdSinhVien">Xoá</a>
                     </td>
                 </tr>
             }
