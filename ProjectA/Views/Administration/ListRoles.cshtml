@@ -4,12 +4,12 @@
     ViewBag.Title = "All Roles";
 }
 
-<h1>All Roles</h1>
+<h2>Danh Sách Phân Quyền</h2>
 
 @if (Model.Any())
 {
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
-       asp-controller="administration">Add new role</a>
+    <a class="btn btn-outline-primary my-3" style="width:auto" asp-action="CreateRole"
+       asp-controller="administration">Thêm một quyền</a>
 
     foreach (var role in Model)
     {
@@ -21,9 +21,9 @@
                 <h5 class="card-title">@role.Name</h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-primary" asp-action="EditRole" 
-                   asp-controller="Administration" asp-route-id="@role.Id">Edit</a>
-                <a class="btn btn-danger" asp-action="EditRole">Delete</a>
+                <a class="btn btn-outline-success" asp-action="EditRole" 
+                   asp-controller="Administration" asp-route-id="@role.Id">Cập nhật</a>
+                <a class="btn btn-outline-danger" asp-action="EditRole">Xoá</a>
             </div>
         </div>
     }

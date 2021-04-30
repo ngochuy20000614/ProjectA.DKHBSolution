@@ -13,41 +13,40 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProjectA</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HocBongUTE</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index">Thông kê</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index"></a>
-                        </li>
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Quản lý
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="Administration"
-                                       asp-action="ListUsers">Quản trị viên</a>
-                                    <a class="dropdown-item" asp-controller="Administration"
-                                       asp-action="ListRoles">Phân quyền</a>
-                                </div>
-                            </li>
-                        }
-                        <li class="nav-item">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="XetHocBong" asp-action="Index"> Danh sách học bổng</a>
+        </li>*@
+
+
+                        @*@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quản lý
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" asp-controller="Administration"
+                       asp-action="ListUsers">Quản trị viên</a>
+                    <a class="dropdown-item" asp-controller="Administration"
+                       asp-action="ListRoles">Phân quyền</a>
+                </div>
+            </li>
+        }*@
+
                             @if (signInManager.IsSignedIn(User))
                             {
                                 <form method="post" asp-action="logout" asp-controller="account">
@@ -58,20 +57,70 @@
                             }
                             else
                             {
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                            }
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Đăng Ký</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Đăng Nhập</a>
+                                </li>
+                             }
 
-                        </li>
-                    </ul>
+                        </ul>
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+            <ul class="list-group col-md-4 col-lg-3 mb-5">
+                <li class="list-group-item">
+                    <a class="text-dark d-flex" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="text-dark d-flex" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
+                </li>
+                <li class="list-group-item">
+                    <a class="text-dark d-flex" asp-area="" asp-controller="XetHocBong" asp-action="Index"> Danh sách học bổng</a>
+                </li>
+
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+
+                    <li class="list-group-item">
+                        <a class="text-dark d-flex" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"> Quản lý</a>
+                    </li>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a class="text-dark d-flex" asp-controller="Administration"
+                                       asp-action="ListUsers">Quản trị viên</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a class="text-dark d-flex" asp-controller="Administration"
+                                       asp-action="ListRoles">Phân quyền</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @*<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quản lý
+                </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Administration"
+                               asp-action="ListUsers">Quản trị viên</a>
+                            <a class="dropdown-item" asp-controller="Administration"
+                               asp-action="ListRoles">Phân quyền</a>
+                        </div>
+                    </li>*@
+                }
+            </ul>
+            <main role="main" class="pb-3 col-md-8 col-lg-9">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

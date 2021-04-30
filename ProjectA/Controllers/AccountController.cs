@@ -28,7 +28,7 @@ namespace ProjectA.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = "Admin")]
+        
         [HttpGet]
         public IActionResult Register()
         {

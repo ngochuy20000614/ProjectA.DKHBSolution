@@ -4,63 +4,62 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>Chi Tiết</h1>
+<h4 class="my-4">Sinh Viên</h4>
+<hr />
 <div>
-    <h4>SinhVien</h4>
-    <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.TenSinhVien)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.TenSinhVien)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.IdLop)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.IdLop)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.PasswordSv)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.PasswordSv)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.NgaySinh)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.NgaySinh)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.SoDienThoai)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.SoDienThoai)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.GioiTinh)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.GioiTinh)
         </dd>
-        <dt class="col-sm-2">
+        <dt class="col-sm-12">
             @Html.DisplayNameFor(model => model.DiaChi)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-12">
             @Html.DisplayFor(model => model.DiaChi)
         </dd>
 
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Quay lại trang trước</a>
 </div>
