@@ -19,10 +19,33 @@ namespace ProjectA.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page = 0)
         {
-            var xetHocBong = _XetHocBong.DanhSachDatHocBong();
-            return View(xetHocBong);
+            int limit = 7;
+            int start;
+            if (page > 0)
+            {
+                page = page + 0;
+            }
+            else
+            {
+                page = 1;
+            }
+            start = (int)(page - 1) * limit;
+
+            ViewBag.pageCurrent = page;
+
+            int totalProduct = _XetHocBong.totalProduct();
+
+            ViewBag.totalProduct = totalProduct;
+
+            ViewBag.numberPage = _XetHocBong.numberPage(totalProduct, limit);
+
+            var data = _XetHocBong.paginationProduct(start, limit);
+
+            return View(data.ToList());
         }
+
+       
     }
 }

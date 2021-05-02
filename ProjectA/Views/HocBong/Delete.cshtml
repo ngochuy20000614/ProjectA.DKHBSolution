@@ -69,7 +69,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdHocBong" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa học bổng này?')"/> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

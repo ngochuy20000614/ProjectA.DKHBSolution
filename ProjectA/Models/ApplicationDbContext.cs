@@ -188,13 +188,13 @@ namespace ProjectA.Models
                 modelBuilder.Entity<Diem>()
                     .HasOne<SinhVien>(sc => sc.IdSinhVienNavigation)
                     .WithMany(s => s.Diems)
-                    .HasForeignKey(sc => sc.IdSinhVien);
+                    .HasForeignKey(sc => sc.IdSinhVien).OnDelete(DeleteBehavior.Cascade);
 
 
                 modelBuilder.Entity<Diem>()
                     .HasOne<HocKy>(sc => sc.IdHocKyNavigation)
                     .WithMany(s => s.Diems)
-                    .HasForeignKey(sc => sc.IdHocKy);
+                    .HasForeignKey(sc => sc.IdHocKy).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<HoatDong>(entity =>

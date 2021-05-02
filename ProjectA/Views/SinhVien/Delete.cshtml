@@ -35,6 +35,8 @@
 
 <form asp-action="Delete">
     <input type="hidden" asp-for="IdSinhVien" />
-    <input type="submit" value="Delete" class="btn btn-outline-danger btn-sm" /> |
+    <input type="submit" value="Delete" class="btn btn-outline-danger btn-sm" 
+           onclick="return confirm('Bạn chắc chắn muốn xóa sinh viên này?')"/> |
+    
     <a asp-action="Index" class="btn btn-sm btn-outline-secondary">Back to List</a>
 </form>

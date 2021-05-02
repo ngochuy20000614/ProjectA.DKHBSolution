@@ -23,6 +23,10 @@ namespace ProjectA.ViewModel
         public string IdLop { get; set; }
 
         [Required(ErrorMessage = "Mã sinh viên phải bắt buộc")]
+        [DisplayName("Học kỳ")]
+        public string IdHocKy { get; set; }
+
+        [Required(ErrorMessage = "Mã sinh viên phải bắt buộc")]
         [DisplayName("Số tín chỉ")]
         public int SoTinChi { get; set; }
 
@@ -39,7 +43,23 @@ namespace ProjectA.ViewModel
         public string XepLoai { get; set; }
 
         [Required(ErrorMessage = "Mã sinh viên phải bắt buộc")]
+        [DisplayName("Điểm rèn luyện")]
+        public byte DiemRenLuyen { get; set; }
+
+        [Required(ErrorMessage = "Mã sinh viên phải bắt buộc")]
         [DisplayName("Số tiền")]
         public double SoTien { get; set; }
+
+        public string PasswordSv { get; set; }
+
+        public string DiaChi { get; set; }
+
+        public string Email { get; set; }
+
+        public DateTime? NgaySinh { get; set; }
+
+        public string GioiTinh { get; set; }
+
+        public string SoDienThoai { get; set; }
     }
 }

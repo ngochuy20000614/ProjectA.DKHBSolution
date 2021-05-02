@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
 using ProjectA.ViewModel;
 namespace ProjectA.Models
 {
@@ -15,29 +18,41 @@ namespace ProjectA.Models
         }
         public IEnumerable<SinhVien> GetStudents => _context.SinhViens.Include(x=>x.IdLopNavigation);
 
-        public SinhVien Create()
+        public Diem Create()
         {
-            var max = _context.SinhViens.Max(b => b.IdSinhVien);
-
-            var b = new SinhVien()
+            var b = new Diem()
             {
-                IdSinhVien = Convert.ToString(Convert.ToInt64(max) + 1)
+                
             };
             return b;
         }
 
-        public void Add(SinhVien sinhVien)
+        public void Add(Diem sinhVien)
         {
-            _context.SinhViens.Add(sinhVien);
+            _context.Diems.Add(sinhVien);
             _context.SaveChanges();
         }
 
-        public SinhVien GetSinhVienById(string Id)
+        public XetHocBongViewModel GetSinhVienById(string Id)
         {
-            SinhVien dbEntity = _context.SinhViens
-                                .Include(h => h.IdLopNavigation)
-                                .FirstOrDefault(s => s.IdSinhVien == Id);
-            return dbEntity;
+            var sinhVien = from sv in _context.SinhViens
+                           join d in _context.Diems on sv.IdSinhVien equals d.IdSinhVien
+                           join l in _context.Lops on sv.IdLop equals l.IdLop
+                           where sv.IdSinhVien == Id
+                           select new { sv, d, l };
+            var query = sinhVien.Select(x => new XetHocBongViewModel()
+            {
+                IdSinhVien = x.sv.IdSinhVien,
+                TenSinhVien = x.sv.TenSinhVien,
+                IdLop = x.l.IdLop,
+                PasswordSv = x.sv.PasswordSv,
+                NgaySinh = x.sv.NgaySinh,
+                Email = x.sv.Email,
+                SoDienThoai = x.sv.SoDienThoai,
+                GioiTinh = x.sv.GioiTinh,
+                DiaChi = x.sv.DiaChi
+            }).FirstOrDefault();
+            return query;
         }
 
         public void Remove(string Id)
@@ -51,7 +66,7 @@ namespace ProjectA.Models
             _context.SinhViens.Update(sinhVien);
             _context.SaveChanges();
         }
-        public SinhVien Get(string id) => _context.SinhViens.FirstOrDefault(s => s.IdSinhVien == id);
+        public SinhVien Get(string id) => _context.SinhViens.Include(b=>b.Diems).FirstOrDefault(s => s.IdSinhVien == id);
 
         public SinhVien[] GetListSV(string search)
         {
@@ -83,14 +98,7 @@ namespace ProjectA.Models
                 GioiTinh = x.p.GioiTinh
             }).ToListAsync();
         }
-        public (SinhVien[] books, int pages, int page) Paging(int page)
-        {
-            int x = _context.SinhViens.Count();
-            int size = 5;
-            int pages = (int)Math.Ceiling((double)x / size);
-            var books = _context.SinhViens.Skip((page - 1) * size).Take(size).ToArray();
-            return (books, pages, page);
-        }
+        
 
         public int numberPage(int totalProduct, int limit)
         {
@@ -99,16 +107,49 @@ namespace ProjectA.Models
 
         }
 
-        public IEnumerable<SinhVien> paginationProduct(int start, int limit)
+        public IEnumerable<XetHocBongViewModel> paginationProduct(int start, int limit)
         {
-            var data = (from s in _context.SinhViens select s);
-            var dataProduct = data.OrderByDescending(x => x.IdSinhVien).Skip(start).Take(limit);
-            return dataProduct.ToList();
+            var sinhVien = from sv in _context.SinhViens
+                           join d in _context.Diems on sv.IdSinhVien equals d.IdSinhVien
+                           join l in _context.Lops on sv.IdLop equals l.IdLop
+                           join hk in _context.HocKies on d.IdHocKy equals hk.IdHocKy
+                           select new { sv, d, l, hk };
+            var query = sinhVien.Select(x => new XetHocBongViewModel()
+            {
+                IdSinhVien = x.sv.IdSinhVien,
+                TenSinhVien = x.sv.TenSinhVien,
+                IdHocKy = x.hk.IdHocKy,
+                IdLop = x.l.IdLop,
+                SoTinChi = x.d.SoTinChi,
+                DiemThang10 = x.d.DiemThang10,
+                DiemThang4 = x.d.DiemThang4,
+                XepLoai = x.d.XepLoai,
+                DiemRenLuyen = x.d.DiemRenLuyen
+            }).OrderByDescending(x => x.DiemThang4).Skip(start).Take(limit);
+            return query.ToList();
         }
 
         public int totalProduct()
         {
             return _context.SinhViens.Count();
+        }
+
+        
+
+        public SinhVien CreateNewSinhVien()
+        {
+            var max = _context.SinhViens.Max(b => b.IdSinhVien);
+            var b = new SinhVien()
+            {
+                IdSinhVien = Convert.ToString(Convert.ToInt64(max) + 1)           
+            };
+            return b;
+        }
+
+        public void AddNewSinhVien(SinhVien sinhVien)
+        {
+            _context.SinhViens.Add(sinhVien);
+            _context.SaveChanges();
         }
     }
 }

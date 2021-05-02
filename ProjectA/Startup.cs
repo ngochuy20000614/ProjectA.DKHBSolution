@@ -42,6 +42,7 @@ namespace ProjectA
 
             services.AddTransient<ISinhVien, SinhVienRepository>();
             services.AddTransient<ILop, LopRepository>();
+            services.AddTransient<IHocKy, HocKyRepository>();
             services.AddTransient<IHocBong, HocBongRepository>();
             services.AddTransient<ILoaiHocBong, LoaiHocBongRepository>();
             services.AddTransient<IDangKyHocBong, DangKyHocBongRepository>();

@@ -21,9 +21,14 @@
                 <h5 class="card-title">@role.Name</h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-outline-success" asp-action="EditRole" 
-                   asp-controller="Administration" asp-route-id="@role.Id">Cập nhật</a>
-                <a class="btn btn-outline-danger" asp-action="EditRole">Xoá</a>
+                <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                    <a class="btn btn-outline-success" asp-action="EditRole"
+                       asp-controller="Administration" asp-route-id="@role.Id">Cập nhật</a>               
+                    <button type="submit" class="btn btn-outline-danger"
+                            onclick="return confirm('Bạn chắc chắn muốn xóa quyền này: @role.Name')">
+                        Xoá
+                    </button>
+                </form>
             </div>
         </div>
     }

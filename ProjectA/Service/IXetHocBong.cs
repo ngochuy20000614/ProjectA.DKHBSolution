@@ -10,5 +10,11 @@ namespace ProjectA.Service
     public interface IXetHocBong
     {
         public XetHocBongViewModel[] DanhSachDatHocBong();
+
+        int numberPage(int totalProduct, int limit);
+
+        public XetHocBongViewModel[] paginationProduct(int start, int limit);
+
+        int totalProduct();
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProjectA.ViewModel;
+﻿using Microsoft.AspNetCore.Http;
+using ProjectA.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,13 +9,17 @@ namespace ProjectA.Models
     {
         IEnumerable<SinhVien> GetStudents { get; }
 
-        SinhVien GetSinhVienById(string Id);
+        XetHocBongViewModel GetSinhVienById(string Id);
 
         SinhVien Get(string id);
 
-        SinhVien Create();
+        SinhVien CreateNewSinhVien();
 
-        void Add(SinhVien sinhVien);
+        void AddNewSinhVien(SinhVien sinhVien);
+
+        Diem Create();
+
+        void Add(Diem sinhVien);
 
         void Remove(string Id);
 
@@ -24,11 +29,12 @@ namespace ProjectA.Models
 
         Task<List<SinhVienViewModel>> GetSinhViens();
 
-        public (SinhVien[] books, int pages, int page) Paging(int page);
-
         int numberPage(int totalProduct, int limit);
-        IEnumerable<SinhVien> paginationProduct(int start, int limit);
+
+        IEnumerable<XetHocBongViewModel> paginationProduct(int start, int limit);
+
         int totalProduct();
 
+        
     }
 }
