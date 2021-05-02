@@ -1,42 +1,229 @@
 ﻿@model ProjectA.ViewModel.RegisterViewModel
 @{
     ViewBag.Title = "User Registration";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<title>@ViewData["Title"] - ProjectA</title>*@
 
-<h2>Đăng Ký Thành Viên</h2>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
 
-<div class="row">
-    <div class="col-md-12">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        :root {
+            --white-color: #fff;
+            --black-color: #000;
+            --text-color: #6F6868;
+            --border-color: #dbdbdb;
+            --primary-color: #428BCA;
+            --header-height: 80px;
+        }
 
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-            <div class="form-group">
-                <label asp-for="Password">Mật khẩu</label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+        html {
+            font-size: 62.5%;
+            line-height: 1.6rem;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .bd_register .box {
+            background-color: #0093e9;
+            background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+            position: relative;
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+        }
+
+        .bd_register .register {
+            display: block;
+            margin: auto;
+            width: 500px;
+            max-width: 100%;
+            padding: 30px;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+            .bd_register .register h1 {
+                color: #2a4365;
+                margin-bottom: 30px;
+                font-size: 28px;
+            }
+
+            .bd_register .register input {
+                width: 100%;
+                margin: 15px 0;
+                font-size: 14px;
+                padding: 10px 15px;
+/*                background-color: antiquewhite;*/
+                outline: none;
+                border: 2px solid #4299e1;
+            }
+
+                .bd_register .register input:focus {
+                    border: 2px solid #ff706d;
+                }
+
+            .bd_register .register label {
+                display: block;
+                text-align: left;
+                font-size: 14px;
+                margin-bottom: 0 !important;
+            }
+
+        .bd_register .action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .bd_register .forgot {
+            display: inline-block;
+            text-decoration: none;
+            color: #0093e9;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .bd_register .register button,
+        .bd_register .register .button {
+            width: 100%;
+            padding: 8px 16px;
+            display: block;
+            background-color: #2a4365;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            border: 2px solid #2a4365;
+            outline: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        body {
+            margin-bottom: 0 !important;
+        }
+
+        .bd_register .btn__signup {
+            display: block;
+            text-decoration: none;
+            margin-top: 30px;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #fff;
+            border-radius: 5px;
+            color: #2a4365;
+            border: 2px solid #2a4365;
+        }
+
+        .cbremember {
+            width: unset !important;
+            margin-right: 5px !important;
+        }
+
+        @@media (max-width: 440px) {
+            .bd_register .register {
+                padding: 15px;
+            }
+        }
+
+        @@media (max-width: 440px) {
+            .bd_register .register h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+    <body class="bd_register">
+        <div class="box">
+            <div class="register">
+                <h1>Đăng Ký Tài Khoản</h1>
+                <form action="" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <label asp-for="Email">Email address</label>
+                    <input type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="Password">Mật Khẩu</label>
+                    <input type="password" asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+                    <input asp-for="ConfirmPassword" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <label asp-for="FirstName">Họ và tên lót</label>
+                    <input asp-for="FirstName" type="text" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <label asp-for="LastName">Tên</label>
+                    <input asp-for="LastName"  type="text" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <div class="action">
+                        <button>Đăng Ký</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName">Họ và tên lót</label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName">Tên</label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary">Đăng Ký</button>
-        </form>
-    </div>
-</div>
+        </div>
+
+
+
+        @*<div class="row justify-content-center align-items-center">
+                <div class="col-md-4 p-3 bg-light">
+                    <h3 class="text-center">Đăng Ký Thành Viên</h3>
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password">Mật khẩu</label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FirstName">Họ và tên lót</label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName">Tên</label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                    </form>
+                </div>
+            </div>*@
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </body>
+</html>
