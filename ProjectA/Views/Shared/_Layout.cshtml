@@ -52,17 +52,39 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end header-nav">
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="HocBong" asp-action="Index">Học Bổng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="Index">SinhVien</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="XetHocBong" asp-action="Index"> Danh sách học bổng</a>
+        </li>*@
 
-                                <a class="nav-link text-light user-name">Xin chào @User.Identity.Name</a>
-                            </li>
-                            <li class="nav-item d-flex align-items-center">
-                                <form class="d-flex align-items-center" method="post" asp-action="logout" asp-controller="account">
-                                    <button type="submit" class="nav-link btn btn-link py-0 text-light">
-                                        Đăng Xuất
+
+                        @*@if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quản lý
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" asp-controller="Administration"
+                       asp-action="ListUsers">Quản trị viên</a>
+                    <a class="dropdown-item" asp-controller="Administration"
+                       asp-action="ListRoles">Phân quyền</a>
+                </div>
+            </li>
+        }*@
+
+                            @if (signInManager.IsSignedIn(User))
+                            {
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                                        Logout @User.Identity.Name
                                     </button>
                                 </form>
                             </li>
@@ -102,9 +124,22 @@
                                        asp-action="ListUsers">Quản trị viên</a>
                                     <a class="list-group-item list-group-item-action" asp-controller="Administration"
                                        asp-action="ListRoles">Phân quyền</a>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    @*<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Quản lý
+                </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Administration"
+                               asp-action="ListUsers">Quản trị viên</a>
+                            <a class="dropdown-item" asp-controller="Administration"
+                               asp-action="ListRoles">Phân quyền</a>
+                        </div>
+                    </li>*@
                 }
             </div>
   
