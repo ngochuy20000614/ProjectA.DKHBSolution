@@ -45,12 +45,20 @@
         .table th {
             text-align: center !important;
         }
+        .fill {
+            min-height: 100%;
+            /*            height: 100%;*/
+        }
+        .list-left {
+            position: sticky;
+            top: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 navbar-dark bg-dark">
-            <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow navbar-dark bg-dark">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HocBongUTE</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -87,32 +95,38 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="list-group col-md-4 col-lg-3 mb-5 list-left">
-                <a asp-area="" asp-controller="HocBong" asp-action="Index" class="list-group-item list-group-item-action" aria-current="true">
-                    Học Bổng
-                </a>
-                <a asp-area="" asp-controller="SinhVien" asp-action="Index" class="list-group-item list-group-item-action">
-                    Sinh Viên
-                </a>
-                <a asp-area="" asp-controller="XetHocBong" asp-action="Index" class="list-group-item list-group-item-action">Danh sách học bổng</a>
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
-                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item list-group-item-action">Quản lý</a>
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            <div class="list-group">
-                                <a class="list-group-item list-group-item-action" asp-controller="Administration"
-                                   asp-action="ListUsers">Quản trị viên</a>
-                                <a class="list-group-item list-group-item-action" asp-controller="Administration"
-                                   asp-action="ListRoles">Phân quyền</a>
+            <div class="col-md-4 col-lg-3 fill bg-success">
+
+
+                <div class="list-group list-left">
+                    <a asp-area="" asp-controller="HocBong" asp-action="Index" class="list-group-item list-group-item-action" aria-current="true">
+                        Học Bổng
+                    </a>
+                    <a asp-area="" asp-controller="SinhVien" asp-action="Index" class="list-group-item list-group-item-action">
+                        Sinh Viên
+                    </a>
+                    <a asp-area="" asp-controller="XetHocBong" asp-action="Index" class="list-group-item list-group-item-action">Danh sách học bổng</a>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="list-group-item list-group-item-action">Quản lý</a>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <div class="list-group">
+                                    <a class="list-group-item list-group-item-action" asp-controller="Administration"
+                                       asp-action="ListUsers">Quản trị viên</a>
+                                    <a class="list-group-item list-group-item-action" asp-controller="Administration"
+                                       asp-action="ListRoles">Phân quyền</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
+                    }
+                </div>
 
+
+
+            </div>
             <main role="main" class="pb-3 col-md-8 col-lg-9">
                 @RenderBody()
             </main>
@@ -120,7 +134,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container-fluid">
             &copy; 2021 - ProjectA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
