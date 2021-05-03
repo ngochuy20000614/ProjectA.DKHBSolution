@@ -10,7 +10,7 @@
     </div>
 </div>*@
 <h2>Bảng điểm</h2>
-<a asp-controller="SinhVien" class="btn btn-outline-primary my-3" asp-action="Create">Tạo bảng điểm mới</a>
+<a asp-controller="SinhVien" class="btn btn-outline-primary my-3" asp-action="Create"><i class="fas fa-plus"></i> Tạo bảng điểm mới</a>
 <div class="table-responsive">
     <table class="table align-middle table-bordered">
         <thead class="table-dark table align-middle">
@@ -38,9 +38,9 @@
                 <td class="align-middle">@item.DiemRenLuyen</td>
                 <td class="align-middle">@item.XepLoai</td>
                 <td class="align-middle">
-                    <a asp-action="Edit" asp-route-id="@item.IdSinhVien" class="btn btn-sm btn-outline-info">Cập nhập</a>
-                    <a asp-action="Details"  class="btn btn-sm btn-outline-dark" asp-route-id="@item.IdSinhVien">Chi tiết</a>
-                    <a asp-action="Delete" class="btn btn-sm btn-outline-danger" asp-route-id="@item.IdSinhVien">Xoá</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdSinhVien" class="my-1 btn btn-sm btn-outline-info"><i class="far fa-edit"></i> Cập nhập</a>
+                    <a asp-action="Details"  class="btn btn-sm btn-outline-dark my-1" asp-route-id="@item.IdSinhVien"><i class="far fa-file-alt"></i> Chi tiết</a>
+                    <a asp-action="Delete" class="btn btn-sm btn-outline-danger my-1" asp-route-id="@item.IdSinhVien"><i class="far fa-trash-alt"></i> Xoá</a>
                 </td>
             </tr>
             }
