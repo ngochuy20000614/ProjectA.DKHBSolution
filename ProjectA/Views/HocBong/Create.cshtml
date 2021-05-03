@@ -4,13 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>HocBong</h4>
+<h2>Thêm Học Bổng</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdHocBong" class="control-label"></label>
@@ -39,6 +37,8 @@
                 <input asp-for="DoiTuongApDung" class="form-control" />
                 <span asp-validation-for="DoiTuongApDung" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="NgayBatDau" class="control-label"></label>
                 <input asp-for="NgayBatDau" class="form-control" />
@@ -64,15 +64,15 @@
                 <input asp-for="NgayDuKienPhatHb" class="form-control" />
                 <span asp-validation-for="NgayDuKienPhatHb" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
+    <div class="form-group">
+        @*<input type="submit" value="Create" class="btn btn-primary" />*@
+        <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus"></i> Thêm</button>
+    </div>
+</form>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-primary" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Quay lại trang trước</a>
 </div>
 
 @section Scripts {
